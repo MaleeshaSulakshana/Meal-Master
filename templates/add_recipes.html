@@ -1,0 +1,299 @@
+{% extends 'base.html' %}
+{% block title %}Meal Master Recipes | My Recipes{% endblock %}
+{% block content %}
+
+<!-- Start All Pages -->
+<div class="all-page-title page-breadcrumb">
+	<div class="container text-center">
+		<div class="row">
+			<div class="col-lg-12">
+				<h1>Add Receipt</h1>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End All Pages -->
+
+<!-- Start Menu -->
+<div class="reservation-box">
+	<div class="container">
+
+		<div class="row">
+			<div class="col-lg-12 col-sm-12 col-xs-12">
+				<div class="contact-block">
+					<form id="contactForm">
+						<div class="row">
+
+							<form action="" id="add_receipt">
+								<div class="col-md-6">
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<input type="text" placeholder="Receipt Title" id="title"
+												class="form-control" name="title" required
+												data-error="Please enter receipt title">
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<input type="text" placeholder="Serves" id="serves" class="form-control"
+												name="serves" required data-error="Please enter serves">
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<input type="text" placeholder="Cooking Time" id="cooking-time"
+												class="form-control" name="cooking-time" required
+												data-error="Please enter cooking time">
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<input type="text" placeholder="Preparing Time" id="prep-time"
+												class="form-control" name="prep-time" required
+												data-error="Please enter preparing time">
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<select class="custom-select d-block form-control" id="category" required
+												data-error="Please select category">
+												<option disabled selected value="none">Select Category</option>
+												<option value="breakfast">Breakfast</option>
+												<option value="lunch">Lunch</option>
+												<option value="dinner">Dinner</option>
+											</select>
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<input type="file" name="img[]" class="file-upload-default" id="thumbnail"
+												accept="image/*">
+											<div class="input-group col-xs-12">
+												<input type="text" class="form-control file-upload-info" disabled
+													placeholder="Upload Thumbnail" required>
+												<span class="input-group-append">
+													<button class="file-upload-browse btn btn-common"
+														type="button">Upload</button>
+												</span>
+											</div>
+										</div>
+									</div>
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<input type="file" name="img[]" class="file-upload-default"
+												id="ingredients-image" accept="image/*">
+											<div class="input-group col-xs-12">
+												<input type="text" class="form-control file-upload-info" disabled
+													placeholder="Upload Ingredients Image" required>
+												<span class="input-group-append">
+													<button class="file-upload-browse btn btn-common"
+														type="button">Upload</button>
+												</span>
+											</div>
+										</div>
+									</div>
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<textarea placeholder="Receipt Ingredients" id="ingredients"
+												class="form-control" name="ingredients" required
+												data-error="Please enter receipt ingredients" rows="10"></textarea>
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+
+								</div>
+
+								<div class="col-md-6">
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<textarea placeholder="Receipt Description" id="description"
+												class="form-control" name="description" required
+												data-error="Please enter receipt description" rows="5"></textarea>
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<textarea placeholder="Receipt Method" id="method" class="form-control"
+												name="method" required data-error="Please enter receipt method"
+												rows="10"></textarea>
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<input type="text" placeholder="Receipt Calories " id="calories"
+												class="form-control" name="calories" required
+												data-error="Please enter receipt calories ">
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<input type="text" placeholder="Receipt Protein  " id="protein"
+												class="form-control" name="protein" required
+												data-error="Please enter receipt protein ">
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<input type="text" placeholder="Receipt Carbohydrates" id="carbohydrates"
+												class="form-control" name="carbohydrates" required
+												data-error="Please enter receipt carbohydrates ">
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<input type="text" placeholder="Receipt Total Fats" id="total-fats"
+												class="form-control" name="total-fats" required
+												data-error="Please enter receipt total fats">
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<input type="text" placeholder="Receipt Dietary Fibre" id="dietary-fibre"
+												class="form-control" name="dietary-fibre" required
+												data-error="Please enter receipt dietary-fibre">
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<input type="text" placeholder="Receipt Cholesterol" id="cholesterol"
+												class="form-control" name="cholesterol" required
+												data-error="Please enter receipt cholesterol">
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<input type="text" placeholder="Receipt Sodium" id="sodium"
+												class="form-control" name="sodium" required
+												data-error="Please enter receipt sodium">
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<input type="text" placeholder="Receipt Total Sugars" id="total-sugars"
+												class="form-control" name="total-sugars" required
+												data-error="Please enter receipt total sugars">
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+
+									<div class="submit-button text-center">
+										<button class="btn btn-common" id="btnAdd" type="button">Add Receipt</button>
+									</div>
+
+								</div>
+
+							</form>
+
+						</div>
+
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+
+	$(function () {
+		$('#btnAdd').click(function () {
+
+			if ($('#title').val() == "" || $('#serves').val() == "" || $('#category').val() == null ||
+				$('#cooking-time').val() == "" || $('#prep-time').val() == "" || $('#ingredients').val() == "" ||
+				$('#description').val() == "" || $('#method').val() == "" ||
+				$('#calories').val() == "" || $('#protein').val() == "" ||
+				$('#carbohydrates').val() == "" || $('#total-fats').val() == "" ||
+				$('#dietary-fibre').val() == "" || $('#cholesterol').val() == "" ||
+				$('#sodium').val() == "" || $('#total-sugars').val() == "" ||
+				$('#thumbnail').val() == "" || $('#ingredients-image').val() == "") {
+				Swal.fire("Add Receipt", "Fields are empty!", "warning");
+				return false;
+
+			} else {
+
+				var form_data = new FormData();
+				form_data.append('title', $('#title').val());
+				form_data.append('serves', $('#serves').val());
+				form_data.append('cooking-time', $('#cooking-time').val());
+				form_data.append('prep-time', $('#prep-time').val());
+				form_data.append('category', $('#category').val());
+				form_data.append('ingredients', $('#ingredients').val());
+				form_data.append('description', $('#description').val());
+				form_data.append('method', $('#method').val());
+				form_data.append('calories', $('#calories').val());
+				form_data.append('protein', $('#protein').val());
+				form_data.append('carbohydrates', $('#carbohydrates').val());
+				form_data.append('total-fats', $('#total-fats').val());
+				form_data.append('dietary-fibre', $('#dietary-fibre').val());
+				form_data.append('cholesterol', $('#cholesterol').val());
+				form_data.append('sodium', $('#sodium').val());
+				form_data.append('total-sugars', $('#total-sugars').val());
+				form_data.append('thumbnail', $('#thumbnail').prop('files')[0]);
+				form_data.append('ingredients-image', $('#ingredients-image').prop('files')[0]);
+
+				$.ajax({
+					url: "/add_new_receipt",
+					enctype: 'multipart/form-data',
+					data: form_data,
+					contentType: false,
+					cache: false,
+					processData: false,
+					type: 'POST',
+				})
+					.done(function (data) {
+						if (data.error) {
+							Swal.fire("Add Receipt", data.error, "warning");
+						}
+						else if (data.success) {
+							Swal.fire("Add Receipt", data.success, "success");
+							location.reload();
+						}
+						else if (data.redirect) {
+							window.location.href = data.redirect
+						}
+						else {
+							Swal.fire("Add Receipt", "Some error occur", "warning");
+						}
+					});
+
+				event.preventDefault();
+
+			}
+		});
+	});
+
+</script>
+
+{% endblock %}

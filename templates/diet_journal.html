@@ -1,0 +1,271 @@
+{% extends 'base.html' %}
+{% block title %}Meal Master Recipes | Diet Journal{% endblock %}
+{% block content %}
+
+
+<div class="all-page-title page-breadcrumb">
+	<div class="container text-center">
+		<div class="row">
+			<div class="col-lg-12">
+				<h1>Diet Journal</h1>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="reservation-box">
+	<div class="container">
+
+		<div class="row">
+			<div class="col-lg-12 col-sm-12 col-xs-12">
+				<div class="contact-block">
+					<form id="contactForm">
+						<div class="row">
+
+							<form action="" id="add_receipt">
+								<div class="col-md-6">
+
+									<div class="blog-comment-box" id="all-journals">
+										<h3>Diet Journals</h3>
+
+										{% if details %}
+										{% for key, journal in details %}
+										<div class="comment-item">
+											<div class="comment-item-left">
+												<img src="static/images/post-img-01.jpg" alt="">
+											</div>
+											<div class="comment-item-right">
+												<div class="pull-left">
+													<a href="#">{{ journal[0] }}</a>
+												</div>
+												<div class="des-l">
+													<p>{{ journal[1] }}</p>
+												</div>
+												<button class="btn btn-common right-btn-re" type="button"
+													onclick="viewJournal('{{ key }}')">View</button>
+											</div>
+										</div>
+
+										<br>
+
+										{% endfor %}
+
+										{% else %}
+										<div class="comment-item">
+											<div class="comment-item-right">
+												<div class="pull-left">
+													<a href="#">No Diet Journals</a>
+												</div>
+											</div>
+										</div>
+										{% endif %}
+
+
+									</div>
+								</div>
+
+								<div class="col-md-6">
+
+									<h3>Add Diet Journal</h3>
+
+									<form action="" id="create_couch_form">
+
+										<div class="col-md-12">
+											<div class="form-group">
+												<input type="date" placeholder="Date" id="date" class="form-control"
+													name="date" required data-error="Please enter date">
+												<div class="help-block with-errors"></div>
+											</div>
+										</div>
+
+										<div class="col-md-12">
+											<div class="form-group">
+												<textarea placeholder="Breakfast, Lunch, Dinner Meal Items"
+													id="meal_items" class="form-control" name="meal_items" required
+													data-error="Please enter breakfast, lunch, dinner meal items"
+													rows="3"></textarea>
+												<div class="help-block with-errors"></div>
+											</div>
+										</div>
+
+										<div class="row">
+											<div class="col-md-6">
+												<div class="col-md-12">
+													<div class="form-group">
+														<input type="text" placeholder="Carbs (g)" id="carbs"
+															class="form-control" name="carbs" required
+															data-error="Please enter carbs(g)">
+														<div class="help-block with-errors"></div>
+													</div>
+												</div>
+
+												<div class="col-md-12">
+													<div class="form-group">
+														<input type="text" placeholder="Fat (g)" id="fat"
+															class="form-control" name="fat" required
+															data-error="Please enter fat(g)">
+														<div class="help-block with-errors"></div>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="col-md-12">
+													<div class="form-group">
+														<input type="number" placeholder="Protein (g)" id="protein"
+															class="form-control" name="protein" required
+															data-error="Please enter protein(g)">
+														<div class="help-block with-errors"></div>
+													</div>
+												</div>
+
+												<div class="col-md-12">
+													<div class="form-group">
+														<input type="text" placeholder="Calories" id="calories"
+															class="form-control" name="calories" required
+															data-error="Please enter calories">
+														<div class="help-block with-errors"></div>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<div class="col-md-12">
+											<div class="form-group">
+												<input type="text" placeholder="How Much Water(L) Did You Drunk"
+													id="water" class="form-control" name="water" required
+													data-error="Please enter how much water(L) did you drunk">
+												<div class="help-block with-errors"></div>
+											</div>
+										</div>
+
+										<div class="col-md-12">
+											<div class="form-group">
+												<input type="number" placeholder="How Many Hours Did You Exercise"
+													id="exercise" class="form-control" name="exercise" min="0" required
+													data-error="Please enter how many hours did you exercise">
+												<div class="help-block with-errors"></div>
+											</div>
+										</div>
+
+										<div class="col-md-12">
+											<div class="form-group">
+												<textarea placeholder="Day In review" id="review" class="form-control"
+													name="review" required data-error="Please enter Day in review"
+													rows="3"></textarea>
+												<div class="help-block with-errors"></div>
+											</div>
+										</div>
+
+										<div class="col-md-12">
+											<div class="form-group">
+												<select class="custom-select d-block form-control" id="type" required
+													data-error="Please select how did you do the day">
+													<option disabled selected value="">Select Category</option>
+													<option value="Excellent">Excellent</option>
+													<option value="Great">Great</option>
+													<option value="Good">Good</option>
+													<option value="Not Good">Not Good</option>
+													<option value="Very Bad">Very Bad</option>
+												</select>
+												<div class="help-block with-errors"></div>
+											</div>
+										</div>
+
+										<div class="submit-button text-center">
+											<button class="btn btn-common" id="btnAdd" type="button">Add</button>
+										</div>
+
+									</form>
+
+								</div>
+
+							</form>
+
+						</div>
+
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+
+	function viewJournal(key) {
+
+		window.location.href = "/view_diet_journal?id=" + key;
+
+	}
+
+	$(function () {
+		$('#btnAdd').click(function () {
+
+			var date = $('#date').val();
+			var meal_items = $('#meal_items').val();
+			var carbs = $('#carbs').val();
+			var fat = $('#fat').val();
+			var protein = $('#protein').val();
+			var calories = $('#calories').val();
+			var water = $('#water').val();
+			var exercise = $('#exercise').val();
+			var review = $('#review').val();
+			var type = $('#type').val();
+
+			if (date == "" || meal_items == "" || carbs == "" || fat == "" ||
+				protein == "" || calories == "" || water == "" || exercise == "" || review == "" || $('#type').val() == null) {
+				swal.fire("Add Diet Journal", "Fields are empty!", "warning");
+
+			} else {
+
+				var form_data = new FormData();
+				form_data.append('date', date);
+				form_data.append('meal_items', meal_items);
+				form_data.append('carbs', carbs);
+				form_data.append('fat', fat);
+				form_data.append('protein', protein);
+				form_data.append('calories', calories);
+				form_data.append('water', water);
+				form_data.append('exercise', exercise);
+				form_data.append('review', review);
+				form_data.append('type', type);
+
+				$.ajax({
+					url: "/add_diet_journal",
+					enctype: 'multipart/form-data',
+					data: form_data,
+					contentType: false,
+					cache: false,
+					processData: false,
+					type: 'POST',
+				})
+					.done(function (data) {
+						if (data.redirect) {
+							window.location.href = data.redirect;
+						}
+						else if (data.success) {
+							Swal.fire("Add Diet Journal", data.success, "success");
+							location.reload();
+						}
+						else if (data.error) {
+							Swal.fire("Add Diet Journal", data.error, "warning");
+						}
+						else if (data.redirect) {
+							window.location.href = data.redirect
+						}
+						else {
+							Swal.fire("Add Diet Journal", "Some error occur!", "warning");
+						}
+					});
+
+			}
+
+			event.preventDefault();
+		});
+	});
+
+
+</script>
+
+{% endblock %}

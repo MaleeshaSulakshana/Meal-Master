@@ -1,0 +1,189 @@
+{% extends 'base.html' %}
+{% block title %}Meal Master Recipes | View Requested Plannings{% endblock %}
+{% block content %}
+
+
+<div class="all-page-title page-breadcrumb">
+	<div class="container text-center">
+		<div class="row">
+			<div class="col-lg-12">
+				<h1>View Requested Plannings</h1>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+{% if details %}
+<div class="blog-box">
+	<div class="container">
+
+		<div class="row align-items-center justify-content-center">
+			<div class="col-xl-8 col-lg-8 col-12">
+				<div class="blog-inner-details-page">
+					<div class="blog-inner-box">
+
+						<div class="inner-blog-detail details-page">
+
+							<blockquote>
+								<ul>
+									<li>
+										<i class="zmdi zmdi-account"></i>Id : <span id="plan_id">{{ details[0][0]
+											}}</span>
+									</li>
+									<li>|</li>
+									<li>
+										<i class="zmdi zmdi-account"></i>Requested Date : <span>{{ details[0][2]
+											}}</span>
+									</li>
+									<li>|</li>
+									<li>
+										<i class="zmdi zmdi-account"></i>category : <span>{{ details[0][3] }}</span>
+									</li>
+									<li>|</li>
+									<li>
+										<i class="zmdi zmdi-account"></i>Age : <span>{{ details[0][4] }} Years</span>
+									</li>
+									<li>|</li>
+									<li>
+										<i class="zmdi zmdi-account"></i>Gender : <span>{{ details[0][5] }}</span>
+									</li>
+									<li>|</li>
+									<li>
+										<i class="zmdi zmdi-account"></i>Height(cm) : <span>{{ details[0][6] }}
+											cm</span>
+									</li>
+									<li>|</li>
+									<li>
+										<i class="zmdi zmdi-account"></i>Weight(kg) : <span>{{ details[0][7] }}
+											Kg</span>
+									</li>
+								</ul>
+							</blockquote>
+
+							<blockquote>
+								<ul>
+									<li>
+										<i class="zmdi zmdi-account"></i>Desired Weight : <span>{{ details[0][8]
+											}} Kg</span>
+									</li>
+								</ul>
+							</blockquote>
+
+							<blockquote>
+								<ul>
+									<li>
+										<i class="zmdi zmdi-account"></i>Vegetarian or Non Vegetarian : <span>{{
+											details[0][9]
+											}}</span>
+									</li>
+								</ul>
+							</blockquote>
+
+							<h3 style="text-transform:uppercase">Preferred Foods</h3>
+							<blockquote>
+								<p>{{ details[0][10] }}</p>
+							</blockquote>
+
+							<h3 style="text-transform:uppercase">allergies</h3>
+							<blockquote>
+								<p>
+									{% if details[0][11] == "" %}
+									-
+									{% else %}
+									{{ details[0][11] }}
+									{% endif %}
+								</p>
+							</blockquote>
+
+							<h3 style="text-transform:uppercase">How many hours user can put to excesses</h3>
+							<blockquote>
+								<p>{{ details[0][12] }} hours</p>
+							</blockquote>
+
+							<form>
+								<h3 style="text-transform:uppercase">Diet Plan</h3>
+								<div class="col-md-12">
+									<div class="form-group">
+										<textarea placeholder="Diet Plan" id="diet_plan" class="form-control"
+											name="diet_plan" required data-error="Please enter diet plan"
+											rows="7">{{ details[0][14] }}</textarea>
+										<div class="help-block with-errors"></div>
+									</div>
+								</div>
+
+								<br>
+								<button class="btn btn-common" id="add_plan" type="button">Add Diet Plan</button>
+								<button class="btn btn-common" id="add_plan" type="button" onclick="goBack()">Go
+									Back</button>
+
+							</form>
+
+
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+{% endif %}
+
+<script>
+
+	function goBack() {
+
+		window.location.href = "requested-plannings";
+
+	}
+
+	$(function () {
+		$('#add_plan').click(function () {
+
+			var plan_id = $('#plan_id').text();
+			var diet_plan = $('#diet_plan').val();
+
+			if (diet_plan == "") {
+				swal.fire("Add Plan", "Fields are empty!", "warning");
+
+			} else {
+
+				var form_data = new FormData();
+				form_data.append('id', plan_id);
+				form_data.append('plan', diet_plan);
+
+				$.ajax({
+					url: "/add_requested_plan",
+					enctype: 'multipart/form-data',
+					data: form_data,
+					contentType: false,
+					cache: false,
+					processData: false,
+					type: 'POST',
+				})
+					.done(function (data) {
+						if (data.redirect) {
+							window.location.href = data.redirect;
+						}
+						else if (data.success) {
+							Swal.fire("Add Plan", data.success, "success");
+						}
+						else if (data.error) {
+							Swal.fire("Add Plan", data.error, "warning");
+						}
+						else {
+							Swal.fire("Add Plan", "Some error occur!", "warning");
+						}
+					});
+
+			}
+
+			event.preventDefault();
+		});
+	});
+
+</script>
+
+{% endblock %}

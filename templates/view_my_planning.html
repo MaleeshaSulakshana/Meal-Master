@@ -1,0 +1,157 @@
+{% extends 'base.html' %}
+{% block title %}Meal Master Recipes | View My Plannings{% endblock %}
+{% block content %}
+
+
+<div class="all-page-title page-breadcrumb">
+	<div class="container text-center">
+		<div class="row">
+			<div class="col-lg-12">
+				<h1>View My Plannings</h1>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+{% if details %}
+<div class="blog-box">
+	<div class="container">
+
+		<div class="row align-items-center justify-content-center">
+			<div class="col-xl-8 col-lg-8 col-12">
+				<div class="blog-inner-details-page">
+					<div class="blog-inner-box">
+
+						<div class="inner-blog-detail details-page" id="view-my-planning">
+
+							<blockquote>
+								<ul>
+									<li>
+										<i class="zmdi zmdi-account"></i>Id : <span>{{ details[0][0] }}</span>
+									</li>
+									<li>|</li>
+									<li>
+										<i class="zmdi zmdi-account"></i>Requested Date : <span>{{ details[0][2]
+											}}</span>
+									</li>
+									<li>|</li>
+									<li>
+										<i class="zmdi zmdi-account"></i>category : <span>{{ details[0][3] }}</span>
+									</li>
+									<li>|</li>
+									<li>
+										<i class="zmdi zmdi-account"></i>Age : <span>{{ details[0][4] }} Years</span>
+									</li>
+									<li>|</li>
+									<li>
+										<i class="zmdi zmdi-account"></i>Gender : <span>{{ details[0][5] }}</span>
+									</li>
+									<li>|</li>
+									<li>
+										<i class="zmdi zmdi-account"></i>Height(cm) : <span>{{ details[0][6] }}
+											cm</span>
+									</li>
+									<li>|</li>
+									<li>
+										<i class="zmdi zmdi-account"></i>Weight(kg) : <span>{{ details[0][7] }}
+											Kg</span>
+									</li>
+								</ul>
+							</blockquote>
+
+							<blockquote>
+								<ul>
+									<li>
+										<i class="zmdi zmdi-account"></i>Desired Weight : <span>{{ details[0][8]
+											}} Kg</span>
+									</li>
+								</ul>
+							</blockquote>
+
+							<blockquote>
+								<ul>
+									<li>
+										<i class="zmdi zmdi-account"></i>Vegetarian or Non Vegetarian : <span>{{
+											details[0][9]
+											}}</span>
+									</li>
+								</ul>
+							</blockquote>
+
+							<h3 style="text-transform:uppercase">Preferred Foods</h3>
+							<blockquote>
+								<p>{{ details[0][10] }}</p>
+							</blockquote>
+
+							<h3 style="text-transform:uppercase">allergies</h3>
+							<blockquote>
+								<p>
+									{% if details[0][11] == "" %}
+									-
+									{% else %}
+									{{ details[0][11] }}
+									{% endif %}
+								</p>
+							</blockquote>
+
+							<h3 style="text-transform:uppercase">How many hours you can put to excesses</h3>
+							<blockquote>
+								<p>{{ details[0][12] }} hours</p>
+							</blockquote>
+
+							{% if details[0][14] != "" %}
+							<h3 style="text-transform:uppercase">Diet Planning</h3>
+							<blockquote>
+								<p>{{ details[0][14] }}</p>
+							</blockquote>
+
+							<blockquote>
+								<ul>
+									<li>
+										<i class="zmdi zmdi-account"></i>Couch Id : <span>{{ details[0][15] }}</span>
+									</li>
+								</ul>
+							</blockquote>
+							{% endif %}
+
+						</div>
+
+						<div class="submit-button text-center">
+							<button class="btn btn-common" id="download"
+								onclick="downloadPdf('{{details[0][0]}} - {{details[0][2]}} - {{details[0][3]}} ')"
+								type="button">Download Planning</button>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+<script>
+
+	function downloadPdf(fileName) {
+
+		var pdf_content = document.getElementById("view-my-planning");
+		var options = {
+			margin: 1,
+			filename: fileName + '.pdf',
+			image: { type: 'jpeg', quality: 0.98 },
+			html2canvas: { scale: 2 },
+			jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+
+		};
+
+		html2pdf(pdf_content, options);
+
+	}
+
+</script>
+
+{% endif %}
+
+{% endblock %}

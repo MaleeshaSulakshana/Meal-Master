@@ -1,0 +1,255 @@
+{% extends 'base.html' %}
+{% block title %}Meal Master Recipes | Account{% endblock %}
+{% block content %}
+
+<!-- Start All Pages -->
+<div class="all-page-title page-breadcrumb">
+	<div class="container text-center">
+		<div class="row">
+			<div class="col-lg-12">
+				<h1>Account</h1>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End All Pages -->
+
+<div class="reservation-box">
+	<div class="container">
+
+		<div class="row">
+			<div class="col-lg-12 col-sm-12 col-xs-12">
+				<div class="contact-block">
+					<form id="contactForm">
+						<div class="row">
+
+							<div class="col-md-6">
+
+								<h3>Account Details</h3>
+
+								<form action="" id="form_edit_account">
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<input type="text" placeholder="Your Name" id="pname" class="form-control"
+												name="pname" required data-error="Please enter your name">
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<input type="email" placeholder="Your Email" id="pemail"
+												class="form-control" name="pemail" disabled>
+										</div>
+									</div>
+
+									<div class="submit-button text-center">
+										<button class="btn btn-common" id="edit_account" type="button">Edit</button>
+										<div id="msgEditProfile" class="h3 text-center hidden"></div>
+										<div class="clearfix"></div>
+									</div>
+
+								</form>
+
+							</div>
+
+							<div class="col-md-6">
+
+								<h3>Change Password</h3>
+
+								<form action="" id="form_psw_change">
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<input type="email" placeholder="Your Email" id="cpemail"
+												class="form-control" name="cpemail" disabled
+												data-error="Please enter your email">
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+
+									<!-- <div class="col-md-12">
+										<div class="form-group">
+											<input type="password" placeholder="Your Password" id="cppsw"
+												class="form-control" name="cppsw" required
+												data-error="Please enter your password">
+											<div class="help-block with-errors"></div>
+										</div>
+									</div> -->
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<input type="password" placeholder="Your New Password" id="cpnpsw"
+												class="form-control" name="rpsw" required
+												data-error="Please enter your new password">
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<input type="password" placeholder="Confirm New Password" id="cpcpsw"
+												class="form-control" name="cpcpsw" required
+												data-error="Please re-enter your new password">
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+
+
+									<div class="submit-button text-center">
+										<button class="btn btn-common" id="change_pws" type="button">Change</button>
+										<div id="msgChangePsw" class="h3 text-center hidden"></div>
+									</div>
+
+								</form>
+
+							</div>
+
+						</div>
+
+					</form>
+
+					<div class="submit-button text-center">
+						<button class="btn btn-common" id="btnDietJournal" type="button">Your Diet Journal</button>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+
+	$('#btnDietJournal').click(function () {
+		window.location.href = "diet-journal";
+	});
+
+	$(document).ready(function () {
+
+		$.ajax({
+			url: "/account_details",
+			enctype: 'multipart/form-data',
+			contentType: false,
+			cache: false,
+			processData: false,
+			type: 'GET',
+		})
+			.done(function (data) {
+				if (data.redirect) {
+					window.location.href = data.redirect;
+				}
+				else if (data.data) {
+					$('#pname').val(data.data.name);
+					$('#pemail').val(data.data.email);
+					$('#cpemail').val(data.data.email);
+				}
+				else {
+					Swal.fire("Account Details", "Some error occur!", "warning");
+				}
+			});
+
+		event.preventDefault();
+	});
+
+
+	$(function () {
+		$('#edit_account').click(function () {
+
+			var name = $('#pname').val();
+			var email = $('#pemail').val();
+
+			if (name == "" || email == "") {
+				swal.fire("Account Details", "Fields are empty!", "warning");
+
+			}
+			else {
+
+				var form_data = new FormData();
+				form_data.append('name', name);
+				form_data.append('email', email);
+
+				$.ajax({
+					url: "/update_user_details",
+					enctype: 'multipart/form-data',
+					data: form_data,
+					contentType: false,
+					cache: false,
+					processData: false,
+					type: 'POST',
+				})
+					.done(function (data) {
+						if (data.redirect) {
+							window.location.href = data.redirect;
+						}
+						else if (data.success) {
+							Swal.fire("Account Details", data.success, "success");
+							window.location.reload();
+						}
+						else if (data.error) {
+							Swal.fire("Account Details", data.error, "warning");
+						}
+						else {
+							Swal.fire("Account Details", "Some error occur!", "warning");
+						}
+					});
+
+			}
+
+			event.preventDefault();
+		});
+	});
+
+
+	$(function () {
+		$('#change_pws').click(function () {
+
+			var email = $('#cpemail').val();
+			var psw = $('#cpnpsw').val();
+			var cpsw = $('#cpcpsw').val();
+
+			if (email == "" || psw == "" || cpsw == "") {
+				swal.fire("Password Change", "Fields are empty!", "warning");
+
+			} else {
+
+				var form_data = new FormData();
+				form_data.append('email', email);
+				form_data.append('psw', psw);
+				form_data.append('cpsw', cpsw);
+
+				$.ajax({
+					url: "/update_user_psw",
+					enctype: 'multipart/form-data',
+					data: form_data,
+					contentType: false,
+					cache: false,
+					processData: false,
+					type: 'POST',
+				})
+					.done(function (data) {
+						if (data.redirect) {
+							window.location.href = data.redirect;
+						}
+						else if (data.success) {
+							Swal.fire("Password Change", data.success, "success");
+							window.location.reload();
+						}
+						else if (data.error) {
+							Swal.fire("Password Change", data.error, "warning");
+						}
+						else {
+							Swal.fire("Password Change", "Some error occur!", "warning");
+						}
+					});
+
+			}
+
+			event.preventDefault();
+		});
+	});
+
+</script>
+
+{% endblock %}

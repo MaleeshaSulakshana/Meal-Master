@@ -1,0 +1,269 @@
+{% extends 'base.html' %}
+{% block title %}Meal Master Recipes | Home{% endblock %}
+{% block content %}
+
+
+<div id="slides" class="cover-slides">
+	<ul class="slides-container">
+		<li class="text-center">
+			<img src="static/images/slider-01.jpg" alt="">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<h1 class="m-b-20"><strong>Welcome To <br> Meal Master Recipes</strong></h1>
+						<p class="m-b-40">See how your users experience your website in realtime or view <br>
+							trends to see any changes in performance over time.</p>
+
+						<p><a class="btn btn-lg btn-circle btn-outline-new-white" href="/all-recipes">View Recipes</a>
+						</p>
+					</div>
+				</div>
+			</div>
+		</li>
+		<li class="text-center">
+			<img src="static/images/slider-02.jpg" alt="">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<h1 class="m-b-20"><strong>Welcome To <br> Meal Master Recipes</strong></h1>
+						<p class="m-b-40">See how your users experience your website in realtime or view <br>
+							trends to see any changes in performance over time.</p>
+
+						<p><a class="btn btn-lg btn-circle btn-outline-new-white" href="/all-recipes">View Recipes</a>
+						</p>
+					</div>
+				</div>
+			</div>
+		</li>
+		<li class="text-center">
+			<img src="static/images/slider-03.jpg" alt="">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<h1 class="m-b-20"><strong>Welcome To <br> Meal Master Recipes</strong></h1>
+						<p class="m-b-40">See how your users experience your website in realtime or view <br>
+							trends to see any changes in performance over time.</p>
+
+						<p><a class="btn btn-lg btn-circle btn-outline-new-white" href="/all-recipes">View Recipes</a>
+						</p>
+					</div>
+				</div>
+			</div>
+		</li>
+	</ul>
+	<div class="slides-navigation">
+		<a href="#" class="next"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
+		<a href="#" class="prev"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
+	</div>
+</div>
+
+
+{% if session['couchId'] %}
+
+<div class="contact-imfo-box">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3">
+				<i class="fa fa-user"></i>
+				<div class="overflow-hidden">
+					<h4>Users</h4>
+					<p class="lead">
+						{{ usersCount }}
+					</p>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<i class="fa fa-user"></i>
+				<div class="overflow-hidden">
+					<h4>Couches</h4>
+					<p class="lead">
+						{{ couchesCount }}
+					</p>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<i class="fa fa-cutlery"></i>
+				<div class="overflow-hidden">
+					<h4>Recipes</h4>
+					<p class="lead">
+						{{ recipesCount }}
+					</p>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<i class="fa fa-hand-paper-o"></i>
+				<div class="overflow-hidden">
+					<h4>Planning Requests</h4>
+					<p class="lead">
+						{{ planningsCount }}
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="contact-imfo-box">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3">
+			</div>
+			<div class="col-md-3">
+				<i class="fa fa-credit-card-alt"></i>
+				<div class="overflow-hidden">
+					<h4>Last Month Subscriptions</h4>
+					<p class="lead">
+						{{ lastMonthSubsCount }}
+					</p>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<i class="fa fa-credit-card-alt"></i>
+				<div class="overflow-hidden">
+					<h4>This Month Subscriptions</h4>
+					<p class="lead">
+						{{ thisMonthSubsCount }}
+					</p>
+				</div>
+			</div>
+			<div class="col-md-3">
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endif %}
+
+
+<div class="about-section-box" id="aboutus">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-6 col-md-6 col-sm-12">
+				<img src="static/images/gallery-img-03.jpg" alt="" class="img-fluid">
+			</div>
+			<div class="col-lg-6 col-md-6 col-sm-12 text-center">
+				<div class="inner-column">
+					<h1><span>About Us</span></h1>
+
+					<p>
+						The Meal Master website is a all in one application for recipe recommendation and meal planning
+						needs.
+						Through this platform users are about to share, retrieve and browse recipe and leave remakes on
+						the
+						current recipe within the Meal Master Community
+					</p>
+
+					<p>
+						Through the Meal Master website our member can get access to meal
+						plan for 3 meal for 7 days by simply answering our questions.
+					</p>
+
+				</div>
+
+			</div>
+
+			<div class="col-md-12">
+				<div class="inner-pt">
+					<p>
+						What our website is trying to implement is healthy eating habit to the community as people
+						nowadays have become so accustomed to quick instant food that has a very negative impact on
+						human
+						heath in both short and long run. Therefor Meal Master main objective is transform healthy
+						eating behavior.
+					</p>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+
+<div class="qt-box qt-background">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8 ml-auto mr-auto text-left">
+				<p class="lead ">
+					" If you're not the one cooking, stay out of the way and compliment the chef. "
+				</p>
+				<span class="lead">Michael Strahan</span>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="menu-box">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="heading-title text-center">
+					<h2>Categories</h2>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="special-menu text-center">
+					<div class="button-group filter-button-group">
+						<button class="active" data-filter="*">All</button>
+						<button data-filter=".breakfast">Breakfast</button>
+						<button data-filter=".lunch">Lunch</button>
+						<button data-filter=".dinner">Dinner</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row special-list">
+
+			{% if breakfast %}
+			{% for item in breakfast %}
+			<div class="col-lg-4 col-md-6 special-grid {{ item[20] }}">
+				<div class="gallery-single fix">
+					<img src="static/images/recipes/{{ item[0] }}/{{ item[17] }}" class="img-fluid" alt="Image">
+					<div class="why-text">
+						<h4>{{ item[2] }}</h4>
+						<a class="btn btn-lg btn-circle btn-outline-new-white"
+							href="{{ url_for('view_recipes_details', id = item[0]) }}">View Receipt</a>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+			{% endif %}
+
+			{% if lunch %}
+			{% for item in lunch %}
+			<div class="col-lg-4 col-md-6 special-grid {{ item[20] }}">
+				<div class="gallery-single fix">
+					<img src="static/images/recipes/{{ item[0] }}/{{ item[17] }}" class="img-fluid" alt="Image">
+					<div class="why-text">
+						<h4>{{ item[2] }}</h4>
+						<a class="btn btn-lg btn-circle btn-outline-new-white"
+							href="{{ url_for('view_recipes_details', id = item[0]) }}">View Receipt</a>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+			{% endif %}
+
+			{% if dinner %}
+			{% for item in dinner %}
+			<div class="col-lg-4 col-md-6 special-grid {{ item[20] }}">
+				<div class="gallery-single fix">
+					<img src="static/images/recipes/{{ item[0] }}/{{ item[17] }}" class="img-fluid" alt="Image">
+					<div class="why-text">
+						<h4>{{ item[2] }}</h4>
+						<a class="btn btn-lg btn-circle btn-outline-new-white"
+							href="{{ url_for('view_recipes_details', id = item[0]) }}">View Receipt</a>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+			{% endif %}
+
+		</div>
+	</div>
+</div>
+
+{% endblock %}

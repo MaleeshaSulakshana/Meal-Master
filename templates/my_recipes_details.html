@@ -1,0 +1,204 @@
+{% extends 'base.html' %}
+{% block title %}Meal Master Recipes | My Recipes{% endblock %}
+{% block content %}
+
+
+{% if details %}
+<div class="all-page-title page-breadcrumb">
+	<div class="container text-center" id="receipt-title">
+		<div class="row">
+			<div class="col-lg-12">
+				<h1>{{ details[2] }}</h1>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="blog-box">
+	<div class="container">
+
+		<div class="row align-items-center justify-content-center">
+			<div class="col-xl-8 col-lg-8 col-12">
+				<div class="blog-inner-details-page">
+					<div class="blog-inner-box" id="recipes-details">
+
+						<img class="img-fluid" src="static/images/recipes/{{ details[0] }}/{{ details[17] }}" alt="">
+						<div class="inner-blog-detail details-page">
+							<ul>
+								<li><i class="zmdi zmdi-account"></i>Posted By : <span>{{ details[21] }}</span></li>
+								<li><i class="zmdi zmdi-account"></i>Posted On : <span>{{ details[19] }}</span></li>
+							</ul>
+
+							<blockquote>
+								<ul>
+									<li>
+										<i class="zmdi zmdi-account"></i>Serves : <span>{{ details[3] }}</span>
+									</li>
+									<li>|</li>
+									<li>
+										<i class="zmdi zmdi-account"></i>Cooking Time : <span>{{ details[4] }}</span>
+									</li>
+									<li>|</li>
+									<li>
+										<i class="zmdi zmdi-account"></i>Preparing Time : <span>{{ details[5] }}</span>
+									</li>
+								</ul>
+							</blockquote>
+
+							<p>{{ details[7] }}</p>
+
+							<h3 style="text-transform:uppercase">Ingredients</h3>
+							<img class="img-fluid" src="static/images/recipes/{{ details[0] }}/{{ details[18] }}"
+								alt="">
+							<p>{{ details[6] }}</p>
+
+							<h3 style="text-transform:uppercase">Method</h3>
+							<p>{{ details[8] }}</p>
+
+							<blockquote>
+								<ul>
+									<li>
+										<i class="zmdi zmdi-account"></i>Calories : <span>{{ details[9] }}</span>
+									</li>
+									<br />
+									<li>
+										<i class="zmdi zmdi-account"></i>Protein : <span>{{ details[10] }}</span>
+									</li>
+									<br />
+									<li>
+										<i class="zmdi zmdi-account"></i>Carbohydrates : <span>{{ details[11] }}</span>
+									</li>
+									<br />
+									<li>
+										<i class="zmdi zmdi-account"></i>Total Fats : <span>{{ details[12] }}</span>
+									</li>
+									<br />
+									<li>
+										<i class="zmdi zmdi-account"></i>Dietary Fibre : <span>{{ details[13] }}</span>
+									</li>
+									<br />
+									<li>
+										<i class="zmdi zmdi-account"></i>Cholesterol : <span>{{ details[14] }}</span>
+									</li>
+									<br />
+									<li>
+										<i class="zmdi zmdi-account"></i>Sodium : <span>{{ details[15] }}</span>
+									</li>
+									<br />
+									<li>
+										<i class="zmdi zmdi-account"></i>Total Sugars : <span>{{ details[16] }}</span>
+									</li>
+								</ul>
+							</blockquote>
+
+							<br>
+							<button class="btn btn-common" id="edit_recept" type="button">Edit Recept</button>
+
+						</div>
+					</div>
+
+					<div class="submit-button text-center">
+						<button class="btn btn-common" id="download"
+							onclick="downloadReceptPdf('My Recept - {{ details[2] }}')" type="button">Download
+							Planning</button>
+					</div>
+
+					{% if comments %}
+					<div class="blog-comment-box" id="comments-section">
+						<h3>Comments</h3>
+
+						{% for comment in comments %}
+						<div class="comment-item">
+							<div class="comment-item-left">
+								<img src="static/images/avt-img.jpg" alt="">
+							</div>
+							<div class="comment-item-right">
+								<div class="pull-left">
+									<a href="#">{{ comment[4] }}</a>
+								</div>
+								<div class="pull-right">
+									<i class="fa fa-calendar" aria-hidden="true"></i>Date : <span>{{ comment[2]
+										}}</span>
+								</div>
+								<div class="des-l">
+									<p>{{ comment[5] }}</p>
+								</div>
+							</div>
+						</div>
+						{% endfor %}
+
+					</div>
+
+					<div class="submit-button text-center">
+						<button class="btn btn-common" id="downloadComments"
+							onclick="downloadCommentPdf('My Recept Comments - {{ details[2] }}')" type="button">Download
+							Comments</button>
+					</div>
+					{% endif %}
+
+				</div>
+			</div>
+
+
+
+		</div>
+	</div>
+</div>
+
+<script>
+
+	function downloadReceptPdf(fileName) {
+
+		var pdf_content = document.getElementById("receipt-title");
+		var pdf_body = document.getElementById("recipes-details");
+
+		pdf_content.append(pdf_body)
+
+		var options = {
+			margin: 1,
+			filename: fileName + '.pdf',
+			image: { type: 'jpeg', quality: 0.98 },
+			html2canvas: { scale: 2 },
+			jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+
+		};
+
+		html2pdf(pdf_content, options);
+
+	}
+
+	function downloadCommentPdf(fileName) {
+
+		var pdf_content = document.getElementById("receipt-title");
+		var pdf_body = document.getElementById("comments-section");
+
+		pdf_content.append(pdf_body)
+
+		var options = {
+			margin: 1,
+			filename: fileName + '.pdf',
+			image: { type: 'jpeg', quality: 0.98 },
+			html2canvas: { scale: 2 },
+			jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+
+		};
+
+		html2pdf(pdf_content, options);
+
+	}
+
+	$(function () {
+		$('#edit_recept').click(function () {
+
+			window.location.href = "edit-receipt?id={{ details[0] }}";
+
+			event.preventDefault();
+		});
+	});
+
+</script>
+
+{% endif %}
+
+{% endblock %}

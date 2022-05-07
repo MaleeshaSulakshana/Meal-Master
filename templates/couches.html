@@ -1,0 +1,243 @@
+{% extends 'base.html' %}
+{% block title %}Meal Master Recipes | Couches{% endblock %}
+{% block content %}
+
+
+<div class="all-page-title page-breadcrumb">
+	<div class="container text-center">
+		<div class="row">
+			<div class="col-lg-12">
+				<h1>Couches</h1>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="reservation-box">
+	<div class="container">
+
+		<div class="row">
+			<div class="col-lg-12 col-sm-12 col-xs-12">
+				<div class="contact-block">
+					<form id="contactForm">
+						<div class="row">
+
+							<form action="" id="add_receipt">
+								<div class="col-md-6">
+
+									<div class="blog-comment-box" id="all-couches">
+										<h3>Couches</h3>
+
+										{% if details %}
+										{% for couch in details %}
+										<div class="comment-item">
+											<div class="comment-item-left">
+												<img src="static/images/avt-img.jpg" alt="">
+											</div>
+											<div class="comment-item-right">
+												<div class="pull-left">
+													<a href="#">{{ couch[0] }}</a>
+												</div>
+												<div class="des-l">
+													<p>{{ couch[1] }}</p>
+												</div>
+												<button class="btn btn-common right-btn-re" id="btnAdd" type="button"
+													onclick="deleteCouch('{{ couch[1] }}')">Delete</button>
+											</div>
+										</div>
+
+										<br>
+
+										{% endfor %}
+
+										<div class="submit-button text-center">
+											<button class="btn btn-common" id="download"
+												onclick="downloadPdf('All Couches')" type="button">Download
+												All Couches</button>
+										</div>
+
+										{% else %}
+										<div class="comment-item">
+											<div class="comment-item-right">
+												<div class="pull-left">
+													<a href="#">No Couches</a>
+												</div>
+											</div>
+										</div>
+										{% endif %}
+
+
+									</div>
+								</div>
+
+								<div class="col-md-6">
+
+									<h3>Add Couch</h3>
+
+									<form action="" id="create_couch_form">
+
+										<div class="col-md-12">
+											<div class="form-group">
+												<input type="text" placeholder="Couch Name" id="rname"
+													class="form-control" name="rname" required
+													data-error="Please enter Couch name">
+												<div class="help-block with-errors"></div>
+											</div>
+										</div>
+
+										<div class="col-md-12">
+											<div class="form-group">
+												<input type="email" placeholder="Couch Email" id="remail"
+													class="form-control" name="remail" required
+													data-error="Please enter Couch email">
+												<div class="help-block with-errors"></div>
+											</div>
+										</div>
+
+										<div class="col-md-12">
+											<div class="form-group">
+												<input type="password" placeholder="Couch Password" id="rpsw"
+													class="form-control" name="rpsw" required
+													data-error="Please enter Couch password">
+												<div class="help-block with-errors"></div>
+											</div>
+										</div>
+
+										<div class="col-md-12">
+											<div class="form-group">
+												<select class="custom-select d-block form-control" id="type" required
+													data-error="Please select couch type">
+													<option disabled selected value="none">Select Couch Type</option>
+													<option value="2">Normal</option>
+													<option value="1">Super</option>
+												</select>
+												<div class="help-block with-errors"></div>
+											</div>
+										</div>
+
+
+										<div class="submit-button text-center">
+											<button class="btn btn-common" id="btnAdd" type="button">Add</button>
+										</div>
+
+									</form>
+
+								</div>
+
+							</form>
+
+						</div>
+
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+
+	function downloadPdf(fileName) {
+
+		var pdf_body = document.getElementById("all-couches");
+
+		var options = {
+			margin: 1,
+			filename: fileName + '.pdf',
+			image: { type: 'jpeg', quality: 0.98 },
+			html2canvas: { scale: 2 },
+			jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+
+		};
+
+		html2pdf(pdf_body, options);
+
+	}
+
+	function deleteCouch(couchEmail) {
+
+		var form_data = new FormData();
+		form_data.append('email', couchEmail);
+
+		$.ajax({
+			url: "/remove_couch",
+			enctype: 'multipart/form-data',
+			data: form_data,
+			contentType: false,
+			cache: false,
+			processData: false,
+			type: 'POST',
+		})
+			.done(function (data) {
+				if (data.redirect) {
+					window.location.href = data.redirect;
+				}
+				else if (data.success) {
+					Swal.fire("Remove Couch", data.success, "success");
+					location.reload();
+				}
+				else if (data.error) {
+					Swal.fire("Remove Couch", data.error, "warning");
+				}
+				else {
+					Swal.fire("Remove Couch", "Some error occur!", "warning");
+				}
+			});
+
+		event.preventDefault();
+	}
+
+	$(function () {
+		$('#btnAdd').click(function () {
+
+			var rname = $('#rname').val();
+			var remail = $('#remail').val();
+			var rpsw = $('#rpsw').val();
+
+			if (rname == "" || remail == "" || rpsw == "" || $('#type').val() == null) {
+				swal.fire("Add Couch", "Fields are empty!", "warning");
+
+			} else {
+
+				var form_data = new FormData();
+				form_data.append('name', rname);
+				form_data.append('email', remail);
+				form_data.append('psw', rpsw);
+				form_data.append('type', $('#type').val());
+
+				$.ajax({
+					url: "/add_couch",
+					enctype: 'multipart/form-data',
+					data: form_data,
+					contentType: false,
+					cache: false,
+					processData: false,
+					type: 'POST',
+				})
+					.done(function (data) {
+						if (data.redirect) {
+							window.location.href = data.redirect;
+						}
+						else if (data.success) {
+							Swal.fire("Add Couch", data.success, "success");
+							location.reload();
+						}
+						else if (data.error) {
+							Swal.fire("Add Couch", data.error, "warning");
+						}
+						else {
+							Swal.fire("Add Couch", "Some error occur!", "warning");
+						}
+					});
+
+			}
+
+			event.preventDefault();
+		});
+	});
+
+
+</script>
+
+{% endblock %}

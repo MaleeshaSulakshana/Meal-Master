@@ -1,0 +1,340 @@
+{% extends 'base.html' %}
+{% block title %}Meal Master Recipes | My Plannings{% endblock %}
+{% block content %}
+
+
+<div class="all-page-title page-breadcrumb">
+	<div class="container text-center">
+		<div class="row">
+			<div class="col-lg-12">
+				<h1>My Plannings</h1>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% if is_show == 'no' %}
+<div class="reservation-box">
+	<div class="container">
+
+		<div class="submit-button text-center">
+
+			<p>You are not subscribe our website for this month.
+				Therefor you can request diet planning.
+				If you want request diet planning please subscribe our site.
+				subscription fee is 20$.
+			</p>
+
+			<!-- <button class="btn btn-common" id="btn-subscribe" type="button">Subscribe Here</button> -->
+			<h3>Subscribe Here</h3>
+			<div id="paypal-button"></div>
+		</div>
+
+	</div>
+</div>
+{% else %}
+<div class="reservation-box">
+	<div class="container">
+
+		<div class="submit-button text-center">
+
+			<p>
+				You have <span style="color: green;"><b>{{ 30 - days }}</b></span> days in subscription
+			</p>
+
+		</div>
+
+	</div>
+</div>
+
+<div class="reservation-box">
+	<div class="container">
+
+		<div class="row">
+			<div class="col-lg-12 col-sm-12 col-xs-12">
+				<div class="contact-block">
+					<form id="contactForm">
+						<div class="row">
+
+							<div class="col-md-6">
+
+								<h3>My Plannings</h3>
+
+								{% if details %}
+								{% for planning in details %}
+								<div class="blog-inner-details-page">
+									<div class="blog-inner-box">
+
+										<div class="inner-blog-detail details-page">
+
+											<blockquote>
+												<h3>Date : {{ planning[2] }}</h3>
+												<h4>Status : <span style="
+													{% if planning[4] == 'requested' %}
+														color: red;
+													{% elif planning[4] == 'received' %}
+														color: green;
+													{% endif %}
+													">
+														<b>{{ planning[4] }}</b>
+													</span></h4>
+												<p>Category : {{ planning[3] }}</p>
+
+												<button class="btn btn-common" type="button"
+													onclick="viewPlanning('{{ planning[0] }}')">View</button>
+
+											</blockquote>
+
+										</div>
+									</div>
+								</div>
+								{% endfor %}
+								{% endif %}
+
+							</div>
+
+							<div class="col-md-6">
+
+								<h3>Request Planning</h3>
+
+								<form action="" id="form_request_palning">
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<select class="custom-select d-block form-control" id="category" required
+												data-error="Please select category">
+												<option disabled selected value="">Select Category</option>
+												<option value="Weight Loss">Weight Loss</option>
+												<option value="Lazy Meal Ideas">Lazy Meal Ideas</option>
+												<option value="Healthy Life Style">Healthy Life Style</option>
+											</select>
+										</div>
+									</div>
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<input type="number" placeholder="Your Age" id="age" class="form-control"
+												name="age" required data-error="Please enter your age" min="0">
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<select class="custom-select d-block form-control" id="gender" required
+												data-error="Please select gender">
+												<option disabled selected value="">Select Gender</option>
+												<option value="Male">Male</option>
+												<option value="Female">Female</option>
+											</select>
+										</div>
+									</div>
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<input type="number" placeholder="Your Height (cm)" id="height"
+												class="form-control" name="height" required
+												data-error="Please enter your height" min="0">
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<input type="number" placeholder="Your Weight (kg)" id="weight"
+												class="form-control" name="weight" required
+												data-error="Please enter your weight" min="0">
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<input type="number" placeholder="Your Desired Weight (kg)"
+												id="desired_weight" class="form-control" name="desired_weight" required
+												data-error="Please enter your desired_weight" min="0">
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<select class="custom-select d-block form-control" id="veg_or_not" required
+												data-error="Please select veg or non">
+												<option disabled selected value="">Select Veg or Non</option>
+												<option value="Vegetarian">Vegetarian</option>
+												<option value="Non-Vegetarian">Non-Vegetarian</option>
+											</select>
+										</div>
+									</div>
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<textarea placeholder="Preferred Foods" id="preferred_foods"
+												class="form-control" name="preferred_foods" required
+												data-error="If you have preferred foods.Please enter"
+												rows="3"></textarea>
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<textarea placeholder="Allergies" id="allergies" class="form-control"
+												name="allergies" required
+												data-error="If you have allergies.Please enter" rows="3"></textarea>
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<input type="number"
+												placeholder="How many hours if you can spend for exercises" id="hours"
+												class="form-control" name="hours" required
+												data-error="Please enter how many hours if you can spend for exercises"
+												min="0">
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+
+
+									<div class="submit-button text-center">
+										<button class="btn btn-common" id="btn-request" type="button">Request</button>
+										<div id="msgChangePsw" class="h3 text-center hidden"></div>
+									</div>
+
+								</form>
+
+							</div>
+
+						</div>
+
+					</form>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+
+	function viewPlanning(requestId) {
+
+		window.location.href = "view-my-plannings?id=" + requestId + "";
+	}
+
+	$(function () {
+		$('#btn-request').click(function () {
+
+			var category = $('#category').val();
+			var age = $('#age').val();
+			var gender = $('#gender').val();
+			var height = $('#height').val();
+			var weight = $('#weight').val();
+			var desired_weight = $('#desired_weight').val();
+			var veg_or_not = $('#veg_or_not').val();
+			var preferred_foods = $('#preferred_foods').val();
+			var allergies = $('#allergies').val();
+			var hours = $('#hours').val();
+
+			if (category == null || age == "" || gender == null || height == "" || weight == "" ||
+				desired_weight == "" || veg_or_not == null || preferred_foods == "" || hours == "") {
+				swal.fire("Request Planning", "Fields are empty!", "warning");
+
+			} else {
+
+				var form_data = new FormData();
+				form_data.append('category', category);
+				form_data.append('age', age);
+				form_data.append('gender', gender);
+				form_data.append('height', height);
+				form_data.append('weight', weight);
+				form_data.append('desired_weight', desired_weight);
+				form_data.append('veg_or_not', veg_or_not);
+				form_data.append('preferred_foods', preferred_foods);
+				form_data.append('allergies', allergies);
+				form_data.append('hours', hours);
+
+				$.ajax({
+					url: "/request_my_planning",
+					enctype: 'multipart/form-data',
+					data: form_data,
+					contentType: false,
+					cache: false,
+					processData: false,
+					type: 'POST',
+				})
+					.done(function (data) {
+						if (data.redirect) {
+							window.location.href = data.redirect;
+						}
+						else if (data.success) {
+							Swal.fire("Request Planning", data.success, "success");
+							window.location.reload();
+						}
+						else if (data.error) {
+							Swal.fire("Request Planning", data.error, "warning");
+						}
+						else {
+							Swal.fire("Request Planning", "Some error occur!", "warning");
+						}
+					});
+
+			}
+
+			event.preventDefault();
+		});
+	});
+
+</script>
+{% endif %}
+
+
+<script src="https://www.paypalobjects.com/api/checkout.js"></script>
+
+<script>
+	var CREATE_PAYMENT_URL = 'http://127.0.0.1:5000/payment';
+	var EXECUTE_PAYMENT_URL = 'http://127.0.0.1:5000/execute';
+
+	paypal.Button.render({
+
+		env: 'sandbox',
+
+		commit: true,
+
+		payment: function () {
+			return paypal.request.post(CREATE_PAYMENT_URL).then(function (data) {
+				return data.paymentID;
+			});
+		},
+
+		onAuthorize: function (data) {
+			return paypal.request.post(EXECUTE_PAYMENT_URL, {
+				paymentID: data.paymentID,
+				payerID: data.payerID
+			}).then(function (res) {
+
+				if (res.error) {
+					Swal.fire("Get Subscription", res.error, "warning");
+				}
+				else if (res.success) {
+					// Swal.fire("Get Subscription", res.success, "success");
+					location.reload();
+				}
+				else if (res.redirect) {
+					window.location.href = res.redirect
+				}
+				else {
+					Swal.fire("Get Subscription", "Some error occur", "warning");
+				}
+
+				// console.log(res.success)
+			});
+		}
+
+	}, '#paypal-button');
+</script>
+
+{% endblock %}

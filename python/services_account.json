@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "meal-master-347814",
+  "private_key_id": "a2fed296cab2326608dad0184857643548ab14d4",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDg+ThkaNNnMeE9\njizScFR67uDVf+6elNtkQRLPihV4RR5GMBmJHPi+2FV0hVOI6Qapfbleg7c5B45X\nTLnZXTItTYPEfpyAVxeZFZklebS6i4odTawDFUqFzDkTF+cnsNqQhY4Rhz/ouM50\nkG8j5G8kai6uwiRbpNKxo34vyC07clQHRWH7YsQCYcjbJZRgQWg4XKvTrX6OLIgC\nqaapSa+N9CNRp4HgYuOFmNo6aFV0ZwLRF3o/lbb9VrbuHYsfZFFDf65i9xfxez1b\nV/yGYpA9oGqU6R9FJTrnTYLYBJZHUHQfEjCLxe5wllxkPVcwZ0UCW/xRoPvlhuXQ\n55W6M+pbAgMBAAECggEAGXySY2muvWucsU0IjeSU5YJnbTh7j3KcsixfFaz2hrQJ\n3Hi5g9uI4JIAiF1MW9/OVeg81lTErozJFuHF0japJxG3gky3rSBwt3KHcYPqshF5\n2Z0Bhi3kzeiXdK7KDKiP8jx3Hkw8tMAu/2yXcrD/2FfBJyIuXUV8awxzELW0Th4M\nv57ufHAVG/wHhyhVv4XxYCwB/Jvd2C/nNAUnc3T0UNE6mK1nGysle8r6BbUUDCf6\nQ7WUzehPTdsZ+WTt0cXr59r2D3Bfzuo1PjTQST4qGrMmsLeEw9qKhERt173Ft5ZH\nIm9PneGUVPnPYeTnSeN40/uV+1Dnp6cIoo7x6eQKGQKBgQDxRbywLYaYGXurCHh3\nzmp75bff5Lcz7ywk5xIfcLbpqWlskKhQhOz6H4cUgh8/u1s4zrhsetowT/8TDGGm\nu+YrLvmCU5tRT5Zs/h6FfXASDYkl3sYvW18H9QMiCSXzO8GICAxfY5d75R1WwxZg\ng/JVvwDwoNqGsA6s1j4+IDJiWQKBgQDutMmIBLLllaiItLNAm0w/Df9I+QSneZ2+\nDXW4nEJxAoD54/ou8PEa5cB5Tgw8PyO9Di+o8rVP83G/ah/pmv96jDXV6gBO2sk0\n9rq7fnDnSfWrxy4KXTRD2TU4ejLxaCNwZrnjqpRmFAcRrGIKHE1lNHr1YpPXcRAD\nRc8Qk9pT0wKBgQC0I1As7eC3ARe/a/Sd5sTEOpBdnuNV6DW6W7fBN6Ops64du6ef\nbo+MdCujmT+Bkv4Z3OX/QH5VYfTdIPprxZClH051Cr1FKTnzqIvbOPuKzwZd+wVX\naE38n+c160SlZTEqwm+SbMY2X6rXE5NKfllZweEOx9pAg4SBcPhJ5DoaCQKBgDn7\nYgSPF6Faw/BI7E2iK1gZn0vraO0BRoa2oESyeBUZRZjtfoTOc9JTwnf0tFYiBB1V\nB9Ci+9WqzZNwRMYqpynuStlmGKMO09bwo5UNdoFH3svV+uH7l8lvRlUsoZkv8YPJ\nABhEA/3zmW/6jmnkTAxsPf3C7yRiyz/wQgbF0z+PAoGAVbnZsbTlOcEgtxs7m8kf\nnzcCkqruqvcJoN7xlRHZuGYJY9ntsaabmXrtRwpRTLApiMMHcBth9P4/T1fvUZNG\nxmOuhk3spcFrj+kggDJz1tR0eNCZc896T2sYNvR4+KNbt18QyukdYGopeTiCFkDM\nXr8nFIFOrscD/gqu+C9Xj24=\n-----END PRIVATE KEY-----\n",
+  "client_email": "mealmaster@meal-master-347814.iam.gserviceaccount.com",
+  "client_id": "110915255500208083504",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/mealmaster%40meal-master-347814.iam.gserviceaccount.com"
+}

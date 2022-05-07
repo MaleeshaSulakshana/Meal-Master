@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block title %}Meal Master Recipes | Requested Plannings{% endblock %}
+{% block content %}
+
+<!-- Start All Pages -->
+<div class="all-page-title page-breadcrumb">
+	<div class="container text-center">
+		<div class="row">
+			<div class="col-lg-12">
+				<h1>Requested Plannings</h1>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End All Pages -->
+
+<!-- Start Menu -->
+<div class="menu-box">
+	<div class="container">
+
+		<div class="row">
+
+			{% if details %}
+			{% for item in details %}
+			<div class="blog-inner-details-page">
+				<div class="blog-inner-box">
+
+					<div class="inner-blog-detail details-page">
+
+						<blockquote>
+							<h3>{{ item[1] }} | {{ item[2] }}</h3>
+							<h5>Date : {{ item[3] }}</h5>
+							<p>Category : {{ item[4] }}</p>
+
+							<button class="btn btn-common" type="button"
+								onclick="viewRequest('{{ item[0] }}')">View</button>
+
+						</blockquote>
+
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+			{% endif %}
+
+
+		</div>
+
+	</div>
+</div>
+
+
+<script>
+
+	function viewRequest(requestId) {
+
+		window.location.href = "view-requested-plannings?id=" + requestId + "";
+
+	}
+
+</script>
+
+
+{% endblock %}

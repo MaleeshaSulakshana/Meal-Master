@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Basic -->
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>{% block title %}{% endblock %}</title>
+
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <link rel="shortcut icon" href="static/images/logo.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="static/images/apple-touch-icon.png">
+
+  <link rel="stylesheet" href="static/css/bootstrap.min.css">
+  <link rel="stylesheet" href="static/css/style.css">
+  <link rel="stylesheet" href="static/css/responsive.css">
+  <link rel="stylesheet" href="static/css/custom.css">
+  <link rel="stylesheet" href="static/css/font-awesome.min.css">
+  <link rel="stylesheet" href="static/css/file-upload.css">
+
+  <script src="static/js/jquery-3.2.1.min.js"></script>
+  <script src="static/js/sweetalert2@11.js"></script>
+  <script src="static/js//html2pdf.bundle.min.js"></script>
+
+</head>
+
+<body>
+  <header class="top-navbar">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">
+          <img src="static/images/logo.png" alt="" />
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars-rs-food"
+          aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbars-rs-food">
+
+          <ul class="navbar-nav ml-auto">
+
+            <li class="nav-item active"><a class="nav-link" href="/index">Home</a></li>
+
+            <li class="nav-item"><a class="nav-link" href="/index#aboutus">About Us</a></li>
+            <li class="nav-item"><a class="nav-link" href="/all-recipes">Recipes</a></li>
+
+            {% if 'couchId' in session %}
+            <li class="nav-item"><a class="nav-link" href="/requested-plannings">Requested Plannings</a></li>
+            {% if session['couchType'] == 'super' %}
+            <li class="nav-item"><a class="nav-link" href="/couches">Couches</a></li>
+            {% endif %}
+            <li class="nav-item"><a class="nav-link" href="/account">Account</a></li>
+            <li class="nav-item"><a class="nav-link" href="/sign_out">Sign Out</a></li>
+
+            {% elif 'userId' in session %}
+            <li class="nav-item"><a class="nav-link" href="/my-recipes">My Recipes</a></li>
+
+            <li class="nav-item"><a class="nav-link" href="/my-plannings">My Plannings</a></li>
+
+
+            <li class="nav-item"><a class="nav-link" href="/account">Account</a></li>
+            <li class="nav-item"><a class="nav-link" href="/sign_out">Sign Out</a></li>
+            {% else %}
+            <li class="nav-item"><a class="nav-link" href="/authentication">Sign In</a></li>
+            {% endif %}
+
+            <li class="nav-item"><a class="nav-link" data-toggle="modal" data-target="#exampleModalCenter"><i
+                  class="fa fa-search" aria-hidden="true"></i></a>
+            </li>
+
+          </ul>
+
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+
+          <h3>Search Recipes</h3>
+          <form action="" id="form_search">
+
+            <div class="col-md-12">
+              <div class="form-group">
+                <input type="text" placeholder="Search Recipes" id="search_recipes" class="form-control"
+                  name="search_recipes" required>
+              </div>
+            </div>
+
+            <div class="submit-button text-center">
+              <button class="btn btn-common" id="btn-search" type="button">Search</button>
+            </div>
+
+          </form>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  {% block content %}{% endblock %}
+
+  <footer class="footer-area bg-f">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-lg-6 col-md-6">
+          <h3>About Us</h3>
+          <p>
+            The Meal Master website is a all in one application for recipe recommendation and meal planning
+            needs.
+            Through this platform users are about to share, retrieve and browse recipe and leave remakes on
+            the
+            current recipe within the Meal Master Community
+          </p>
+        </div>
+
+        <div class="col-lg-6 col-md-6">
+          <h3>Contact information</h3>
+          <!-- <p class="lead">Ipsum Street, Lorem Tower, MO, Columbia, 508000</p> -->
+          <p class="lead"><a href="#">077 447 9959</a></p>
+          <p><a href="#"> info@mealmaster.com</a></p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="copyright">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <p class="company-name">All Rights Reserved. &copy; 2022 Meal Master Recipes</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </footer>
+  <!-- End Footer -->
+
+  <a href="#" id="back-to-top" title="Back to top" style="display: none;">&uarr;</a>
+
+  <!-- ALL JS FILES -->
+  <script src="static/js/popper.min.js"></script>
+  <script src="static/js/bootstrap.min.js"></script>
+  <!-- ALL PLUGINS -->
+  <script src="static/js/jquery.superslides.min.js"></script>
+  <script src="static/js/images-loded.min.js"></script>
+  <script src="static/js/isotope.min.js"></script>
+  <script src="static/js/baguetteBox.min.js"></script>
+  <script src="static/js/form-validator.min.js"></script>
+  <script src="static/js/contact-form-script.js"></script>
+  <script src="static/js/file-upload.js"></script>
+  <script src="static/js/custom.js"></script>
+
+  <script>
+
+    $(function () {
+      $('#btn-search').click(function () {
+
+        var search_recipes = $('#search_recipes').val();
+
+        if (search_recipes == "") {
+          swal.fire("Search", "Fields are empty!", "warning");
+
+        } else {
+          window.location.href = "all-recipes?search=" + search_recipes + "";
+        }
+
+        event.preventDefault();
+      });
+    });
+
+  </script>
+
+</body>
+
+</html>

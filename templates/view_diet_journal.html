@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+{% block title %}Meal Master Recipes | View Diet Journal{% endblock %}
+{% block content %}
+
+
+<div class="all-page-title page-breadcrumb">
+	<div class="container text-center">
+		<div class="row">
+			<div class="col-lg-12">
+				<h1>View Diet Journal</h1>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+{% if details %}
+<div class="blog-box">
+	<div class="container">
+
+		<div class="row align-items-center justify-content-center">
+			<div class="col-xl-8 col-lg-8 col-12">
+				<div class="blog-inner-details-page">
+					<div class="blog-inner-box">
+
+						<div class="inner-blog-detail details-page" id="view-diet-journal">
+
+							<blockquote>
+								<ul>
+									<li>
+										<i class="zmdi zmdi-account"></i>Date : <span>{{ details[0] }}</span>
+									</li>
+								</ul>
+							</blockquote>
+
+							<h3 style="text-transform:uppercase">Meal Items</h3>
+							<blockquote>
+								<p>{{ details[1] }}</p>
+							</blockquote>
+
+							<blockquote>
+								<ul>
+									<li>
+										<i class="zmdi zmdi-account"></i>Carbs (g) : <span>{{ details[2] }}</span>
+									</li>
+									<li>|</li>
+									<li>
+										<i class="zmdi zmdi-account"></i>Fat (g) : <span>{{ details[3] }}</span>
+									</li>
+									<li>|</li>
+									<li>
+										<i class="zmdi zmdi-account"></i>Protein (g) : <span>{{ details[4] }}</span>
+									</li>
+									<li>|</li>
+									<li>
+										<i class="zmdi zmdi-account"></i>Calories : <span>{{ details[5] }}</span>
+									</li>
+								</ul>
+							</blockquote>
+
+							<blockquote>
+								<ul>
+									<li>
+										<i class="zmdi zmdi-account"></i>Water Liters : <span>{{ details[6] }}</span>
+									</li>
+								</ul>
+							</blockquote>
+
+							<blockquote>
+								<ul>
+									<li>
+										<i class="zmdi zmdi-account"></i>Exercised Hours : <span>{{ details[7] }}</span>
+									</li>
+								</ul>
+							</blockquote>
+
+							<h3 style="text-transform:uppercase">Day In Review</h3>
+							<blockquote>
+								<p>{{ details[8] }}</p>
+							</blockquote>
+
+							<blockquote>
+								<ul>
+									<li>
+										<i class="zmdi zmdi-account"></i>How was the day : <span>{{ details[9] }}</span>
+									</li>
+								</ul>
+							</blockquote>
+
+
+						</div>
+
+						<div class="submit-button text-center">
+							<button class="btn btn-common" id="download"
+								onclick="downloadPdf('{{details[0]}} - Diet Journal ')" type="button">Download
+								Planning</button>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+<script>
+
+	function downloadPdf(fileName) {
+
+		var pdf_content = document.getElementById("view-diet-journal");
+		var options = {
+			margin: 1,
+			filename: fileName + '.pdf',
+			image: { type: 'jpeg', quality: 0.98 },
+			html2canvas: { scale: 2 },
+			jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+
+		};
+
+		html2pdf(pdf_content, options);
+
+	}
+
+</script>
+
+{% endif %}
+
+{% endblock %}

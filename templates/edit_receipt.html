@@ -1,0 +1,286 @@
+{% extends 'base.html' %}
+{% block title %}Meal Master Recipes | My Recipes{% endblock %}
+{% block content %}
+
+<!-- Start All Pages -->
+<div class="all-page-title page-breadcrumb">
+	<div class="container text-center">
+		<div class="row">
+			<div class="col-lg-12">
+				<h1>Edit Receipt</h1>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End All Pages -->
+
+<!-- Start Menu -->
+{% if details %}
+<div class="reservation-box">
+	<div class="container">
+
+		<div class="row">
+			<div class="col-lg-12 col-sm-12 col-xs-12">
+				<div class="contact-block">
+					<form id="contactForm">
+						<div class="row">
+
+							<form action="" id="edit_receipt">
+								<div class="col-md-6">
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<input type="text" placeholder="Receipt Id" id="id" class="form-control"
+												name="id" value="{{ details[0] }}" required disabled>
+										</div>
+									</div>
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<input type="text" placeholder="Receipt Title" id="title"
+												class="form-control" name="title" value="{{ details[2] }}" required
+												data-error="Please enter receipt title">
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<input type="text" placeholder="Serves" id="serves" class="form-control"
+												value="{{ details[3] }}" name="serves" required
+												data-error="Please enter serves">
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<input type="text" placeholder="Cooking Time" id="cooking-time"
+												class="form-control" name="cooking-time" value="{{ details[4] }}"
+												required data-error="Please enter cooking time">
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<input type="text" placeholder="Preparing Time" id="prep-time"
+												class="form-control" name="prep-time" value="{{ details[5] }}" required
+												data-error="Please enter preparing time">
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<select class="custom-select d-block form-control" id="category" required
+												data-error="Please select category" value="{{ details[20] }}">
+												<option disabled value="none">Select Category</option>
+												<option value="breakfast" {% if details[20]=='breakfast' %} selected {%
+													endif %}>Breakfast</option>
+												<option value="lunch" {% if details[20]=='lunch' %} selected {% endif
+													%}>Lunch</option>
+												<option value="dinner" {% if details[20]=='dinner' %} selected {% endif
+													%}>Dinner</option>
+											</select>
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<textarea placeholder="Receipt Ingredients" id="ingredients"
+												class="form-control" name="ingredients" required
+												data-error="Please enter receipt ingredients"
+												rows="10">{{ details[6] }}</textarea>
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+
+								</div>
+
+								<div class="col-md-6">
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<textarea placeholder="Receipt Description" id="description"
+												class="form-control" name="description" required
+												data-error="Please enter receipt description" rows="5">
+												{{ details[7] }}
+											</textarea>
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<textarea placeholder="Receipt Method" id="method" class="form-control"
+												name="method" required data-error="Please enter receipt method"
+												rows="10">
+												{{ details[8] }}
+											</textarea>
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<input type="text" placeholder="Receipt Calories " id="calories"
+												class="form-control" name="calories" value="{{ details[9] }}" required
+												data-error="Please enter receipt calories ">
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<input type="text" placeholder="Receipt Protein  " id="protein"
+												class="form-control" name="protein" value="{{ details[10] }}" required
+												data-error="Please enter receipt protein ">
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<input type="text" placeholder="Receipt Carbohydrates" id="carbohydrates"
+												class="form-control" name="carbohydrates" value="{{ details[11] }}"
+												required data-error="Please enter receipt carbohydrates ">
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<input type="text" placeholder="Receipt Total Fats" id="total-fats"
+												class="form-control" name="total-fats" value="{{ details[11] }}"
+												required data-error="Please enter receipt total fats">
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<input type="text" placeholder="Receipt Dietary Fibre" id="dietary-fibre"
+												class="form-control" name="dietary-fibre" value="{{ details[12] }}"
+												required data-error="Please enter receipt dietary-fibre">
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<input type="text" placeholder="Receipt Cholesterol" id="cholesterol"
+												class="form-control" name="cholesterol" value="{{ details[13] }}"
+												required data-error="Please enter receipt cholesterol">
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<input type="text" placeholder="Receipt Sodium" id="sodium"
+												class="form-control" name="sodium" value="{{ details[14] }}" required
+												data-error="Please enter receipt sodium">
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<input type="text" placeholder="Receipt Total Sugars" id="total-sugars"
+												class="form-control" name="total-sugars" value="{{ details[15] }}"
+												required data-error="Please enter receipt total sugars">
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+
+									<div class="submit-button text-center">
+										<button class="btn btn-common" id="btn-edit" type="button">Edit Receipt</button>
+									</div>
+
+								</div>
+
+							</form>
+
+						</div>
+
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+
+	$(function () {
+		$('#btn-edit').click(function () {
+
+			if ($('#id').val() == "" || $('#title').val() == "" || $('#serves').val() == "" || $('#category').val() == null ||
+				$('#cooking-time').val() == "" || $('#prep-time').val() == "" || $('#ingredients').val() == "" ||
+				$('#description').val() == "" || $('#method').val() == "" ||
+				$('#calories').val() == "" || $('#protein').val() == "" ||
+				$('#carbohydrates').val() == "" || $('#total-fats').val() == "" ||
+				$('#dietary-fibre').val() == "" || $('#cholesterol').val() == "" ||
+				$('#sodium').val() == "" || $('#total-sugars').val() == ""
+			) {
+				Swal.fire("Edit Receipt", "Fields are empty!", "warning");
+				return false;
+
+			} else {
+
+				var form_data = new FormData();
+				form_data.append('id', $('#id').val());
+				form_data.append('title', $('#title').val());
+				form_data.append('serves', $('#serves').val());
+				form_data.append('cooking-time', $('#cooking-time').val());
+				form_data.append('prep-time', $('#prep-time').val());
+				form_data.append('category', $('#category').val());
+				form_data.append('ingredients', $('#ingredients').val());
+				form_data.append('description', $('#description').val());
+				form_data.append('method', $('#method').val());
+				form_data.append('calories', $('#calories').val());
+				form_data.append('protein', $('#protein').val());
+				form_data.append('carbohydrates', $('#carbohydrates').val());
+				form_data.append('total-fats', $('#total-fats').val());
+				form_data.append('dietary-fibre', $('#dietary-fibre').val());
+				form_data.append('cholesterol', $('#cholesterol').val());
+				form_data.append('sodium', $('#sodium').val());
+				form_data.append('total-sugars', $('#total-sugars').val());
+
+				$.ajax({
+					url: "/edit_exist_receipt",
+					enctype: 'multipart/form-data',
+					data: form_data,
+					contentType: false,
+					cache: false,
+					processData: false,
+					type: 'POST',
+				})
+					.done(function (data) {
+						if (data.error) {
+							Swal.fire("Edit Receipt", data.error, "warning");
+						}
+						else if (data.success) {
+							Swal.fire("Edit Receipt", data.success, "success");
+						}
+						else if (data.redirect) {
+							window.location.href = data.redirect
+							Swal.fire("Edit Receipt", data.success, "success");
+						}
+						else {
+							Swal.fire("Edit Receipt", "Some error occur", "warning");
+						}
+					});
+
+				event.preventDefault();
+
+			}
+		});
+	});
+
+</script>
+{% endif %}
+
+{% endblock %}

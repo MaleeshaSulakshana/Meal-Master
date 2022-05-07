@@ -1,0 +1,223 @@
+{% extends 'base.html' %}
+{% block title %}Yamifood Recipes | Authentication{% endblock %}
+{% block content %}
+
+<!-- Start All Pages -->
+<div class="all-page-title page-breadcrumb">
+	<div class="container text-center">
+		<div class="row">
+			<div class="col-lg-12">
+				<h1>Sign In or Sign Up</h1>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End All Pages -->
+
+<div class="reservation-box">
+	<div class="container">
+
+		<div class="row">
+			<div class="col-lg-12 col-sm-12 col-xs-12">
+				<div class="contact-block">
+					<form id="contactForm">
+						<div class="row">
+
+							<div class="col-md-6">
+
+								<h3>Sign In</h3>
+
+								<form action="">
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<input type="email" placeholder="Your Email" id="lemail"
+												class="form-control" name="lemail" required
+												data-error="Please enter your email">
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group">
+											<input type="password" placeholder="Your Password" id="lpsw"
+												class="form-control" name="lpsw" required
+												data-error="Please enter your password">
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+
+									<div class="submit-button text-center">
+										<button class="btn btn-common" id="sign_in" type="button">Sign In</button>
+										<!-- <div id="msgSubmit" class="h3 text-center hidden"></div>
+											<div class="clearfix"></div> -->
+									</div>
+
+								</form>
+
+							</div>
+
+							<div class="col-md-6">
+
+								<h3>Sign Up</h3>
+
+								<form action="">
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<input type="text" placeholder="Your Name" id="rname" class="form-control"
+												name="rname" required data-error="Please enter your name">
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<input type="email" placeholder="Your Email" id="remail"
+												class="form-control" name="remail" required
+												data-error="Please enter your email">
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<input type="password" placeholder="Your Password" id="rpsw"
+												class="form-control" name="rpsw" required
+												data-error="Please enter your password">
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<input type="password" placeholder="Confirm Password" id="rcpsw"
+												class="form-control" name="rcpsw" required
+												data-error="Please re-enter your password">
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+
+
+									<div class="submit-button text-center">
+										<button class="btn btn-common" id="sign_up" type="button">Sign Up</button>
+									</div>
+
+								</form>
+
+							</div>
+
+						</div>
+
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script>
+
+	$(function () {
+		$('#sign_in').click(function () {
+
+			var email = $('#lemail').val();
+			var psw = $('#lpsw').val();
+
+			if (email == "" || psw == "") {
+				swal.fire("Sign In", "Fields are empty!", "warning");
+
+			} else {
+
+				var form_data = new FormData();
+				form_data.append('email', email);
+				form_data.append('psw', psw);
+
+				$.ajax({
+					url: "/user_sign_in",
+					enctype: 'multipart/form-data',
+					data: form_data,
+					contentType: false,
+					cache: false,
+					processData: false,
+					type: 'POST',
+				})
+					.done(function (data) {
+						if (data.redirect) {
+							window.location.href = data.redirect;
+						}
+						else if (data.success) {
+							Swal.fire("Sign In", data.success, "success");
+							document.getElementById("form_login_account").reset();
+						}
+						else if (data.error) {
+							Swal.fire("Sign In", data.error, "warning");
+						}
+						else {
+							Swal.fire("Sign In", "Some error occur!", "warning");
+						}
+					});
+
+			}
+
+			event.preventDefault();
+		});
+	});
+
+
+	$(function () {
+		$('#sign_up').click(function () {
+
+			var rname = $('#rname').val();
+			var remail = $('#remail').val();
+			var rpsw = $('#rpsw').val();
+			var rcpsw = $('#rcpsw').val();
+
+			if (rname == "" || remail == "" || rpsw == "" || rcpsw == "") {
+				swal.fire("Sign Up", "Fields are empty!", "warning");
+
+			} else {
+
+				var form_data = new FormData();
+				form_data.append('name', rname);
+				form_data.append('email', remail);
+				form_data.append('psw', rpsw);
+				form_data.append('cpsw', rcpsw);
+
+
+				$.ajax({
+					url: "/user_sign_up",
+					enctype: 'multipart/form-data',
+					data: form_data,
+					contentType: false,
+					cache: false,
+					processData: false,
+					type: 'POST',
+				})
+					.done(function (data) {
+						if (data.redirect) {
+							window.location.href = data.redirect;
+						}
+						else if (data.success) {
+							Swal.fire("Sign Up", data.success, "success");
+							location.reload();
+							document.getElementById("form_create_account").reset();
+						}
+						else if (data.error) {
+							Swal.fire("Sign Up", data.error, "warning");
+						}
+						else {
+							Swal.fire("Sign Up", "Some error occur!", "warning");
+						}
+					});
+
+			}
+
+			event.preventDefault();
+		});
+	});
+
+</script>
+
+
+{% endblock %}
