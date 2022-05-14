@@ -118,7 +118,8 @@
 
 
 										<div class="submit-button text-center">
-											<button class="btn btn-common" id="btnAdd" type="button">Add</button>
+											<button class="btn btn-common" id="btnAdd" onclick="addCouch()"
+												type="button">Add</button>
 										</div>
 
 									</form>
@@ -188,54 +189,52 @@
 		event.preventDefault();
 	}
 
-	$(function () {
-		$('#btnAdd').click(function () {
+	function addCouch() {
 
-			var rname = $('#rname').val();
-			var remail = $('#remail').val();
-			var rpsw = $('#rpsw').val();
+		var rname = $('#rname').val();
+		var remail = $('#remail').val();
+		var rpsw = $('#rpsw').val();
 
-			if (rname == "" || remail == "" || rpsw == "" || $('#type').val() == null) {
-				swal.fire("Add Couch", "Fields are empty!", "warning");
+		if (rname == "" || remail == "" || rpsw == "" || $('#type').val() == null) {
+			swal.fire("Add Couch", "Fields are empty!", "warning");
 
-			} else {
+		} else {
 
-				var form_data = new FormData();
-				form_data.append('name', rname);
-				form_data.append('email', remail);
-				form_data.append('psw', rpsw);
-				form_data.append('type', $('#type').val());
+			var form_data = new FormData();
+			form_data.append('name', rname);
+			form_data.append('email', remail);
+			form_data.append('psw', rpsw);
+			form_data.append('type', $('#type').val());
 
-				$.ajax({
-					url: "/add_couch",
-					enctype: 'multipart/form-data',
-					data: form_data,
-					contentType: false,
-					cache: false,
-					processData: false,
-					type: 'POST',
-				})
-					.done(function (data) {
-						if (data.redirect) {
-							window.location.href = data.redirect;
-						}
-						else if (data.success) {
-							Swal.fire("Add Couch", data.success, "success");
-							location.reload();
-						}
-						else if (data.error) {
-							Swal.fire("Add Couch", data.error, "warning");
-						}
-						else {
-							Swal.fire("Add Couch", "Some error occur!", "warning");
-						}
-					});
+			$.ajax({
+				url: "/add_couch",
+				enctype: 'multipart/form-data',
+				data: form_data,
+				contentType: false,
+				cache: false,
+				processData: false,
+				type: 'POST',
+			})
+				.done(function (data) {
+					if (data.redirect) {
+						window.location.href = data.redirect;
+					}
+					else if (data.success) {
+						Swal.fire("Add Couch", data.success, "success");
+						location.reload();
+					}
+					else if (data.error) {
+						Swal.fire("Add Couch", data.error, "warning");
+					}
+					else {
+						Swal.fire("Add Couch", "Some error occur!", "warning");
+					}
+				});
 
-			}
+		}
 
-			event.preventDefault();
-		});
-	});
+		event.preventDefault();
+	}
 
 
 </script>
